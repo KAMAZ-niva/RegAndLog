@@ -54,7 +54,7 @@ void reg() {
 	}
 	cout << "Enter your password (Numbers only):\n";
 	cin >> pass;
-	acc.open("C:/Users/fedor/Desktop/ACCOUNT_DATA.txt", std::ios::app);
+	acc.open("YOUR DIRECTORY", std::ios::app);
 	acc << log << std::endl << pass << std::endl;
 	acc.close();
 	cout << "Successful!";
