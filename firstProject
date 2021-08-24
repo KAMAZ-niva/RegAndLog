@@ -1,0 +1,73 @@
+#include <iostream>
+#include <fstream>
+#include <string>
+#include <cstdlib>
+
+using std::cout;
+using std::cin;
+
+int showmenu() {
+	int choise;
+	cout << "1. Log-In  |  2.Registration:\n";
+	cin >> choise;
+	return choise;
+}
+
+void login() {
+	std::string log{}, check{};
+	int pass{}, a{};
+	cout << "Enter your login:\n";
+	cin.ignore();
+	getline(cin, log);
+	cout << "Enter your password:\n";
+	cin >> pass;
+	std::ifstream login("YOUR DIRECTORY");
+	if (!login.is_open()) {
+	cout << "Error!";
+	exit(EXIT_FAILURE);
+	}
+	else {
+		while (!login.eof())
+			login >> check >> a;
+		if (check != log || a != pass || (check != log && a != pass))
+			cout << "Incorrect login or password!";
+		else
+			if (check == log && a == pass)
+				cout << "Welcome!";
+		login.close();
+		exit(EXIT_SUCCESS);
+	}
+
+}
+void reg() {
+	std::string log{}, check{};
+	int pass{}, a{};
+	std::ofstream acc;
+	cout << "Enter your username (login):\n";
+	cin.ignore();
+	getline(cin, log);
+	std::ifstream account("YOUR DIRECTORY");
+	account >> check;
+	if (check == log) {
+		cout << "This user already exists, please enter a different name\a";
+		exit(EXIT_FAILURE);
+	}
+	cout << "Enter your password (Numbers only):\n";
+	cin >> pass;
+	acc.open("C:/Users/fedor/Desktop/ACCOUNT_DATA.txt", std::ios::app);
+	acc << log << std::endl << pass << std::endl;
+	acc.close();
+	cout << "Successful!";
+	exit(EXIT_SUCCESS);
+}
+
+
+int main() {
+	int ans = showmenu();
+	switch (ans) {
+	case 1: login();
+	case 2: reg();
+	default: cout << "Incorrect input!";
+	}
+		return 0;
+}
